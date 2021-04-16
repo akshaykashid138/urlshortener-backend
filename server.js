@@ -12,7 +12,6 @@ const app=express()
 
 app.use(express.json())
 app.use(cors())
-const mongoUrl=process.env.MONGO_URL
 mongoose.connect(process.env.MONGO_URL)
         .then(()=>console.log("database connected"))
         .catch((err)=> console.log("something went wrong",err))
@@ -36,5 +35,5 @@ app.get('/:hash',(req,res)=>{
     
 })
 
-
-app.listen(4000,()=> console.log("server started"))
+const PORT=process.env.PORT || 4000
+app.listen(PORT,()=> console.log("server started"))
