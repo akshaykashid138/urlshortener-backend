@@ -21,7 +21,8 @@ router.post('/register',async (req,res)=>{
 
     const token=jwt.sign({email,password},process.env.JWT_ACC_KEY, {expiresIn:'20m'})
 
-    registrationMail(email,token)
+    registrationMail(email,token,res)
+   
 
 })
 
@@ -142,7 +143,7 @@ router.put('/reset-password',async (req,res)=>{
 
 //registration mail
 try{
-    function registrationMail(email,token) {
+    function registrationMail(email,token,res) {
         let transporter = nodemailer.createTransport({
            service: "gmail", 
             auth: {
@@ -169,6 +170,7 @@ try{
                 console.log(error);
             } else {
                 console.log("Mailed!!");
+                res.json({message:"email is sent to eamil account. Please validate your account."})
             }
         });
     
