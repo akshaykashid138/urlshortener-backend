@@ -69,7 +69,9 @@ router.get('/record-per-day',async (req,res)=>{
 //per day count
 router.get('/record-per-month',async (req,res)=>{
     const today = moment().startOf('month')
-
+    const end=moment().endOf('month').toDate()
+    console.log("today:::",today)
+    console.log("end::::",end)
            const records=await Url.find({
             createdAt: {
                 $gte: today.toDate(),
